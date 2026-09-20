@@ -7,7 +7,7 @@ The entry point utilizes **Amazon CloudFront** as an edge security boundary and 
 
 ---
 
-## 2. Component Topology
+## 2. Architecture Diagram
 
 ```text
                          [ Internet Users ]
