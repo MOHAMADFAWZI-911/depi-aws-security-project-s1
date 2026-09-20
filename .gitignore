@@ -2,3 +2,5 @@
 *.tfstate.*
 .terraform/
 *.tfvars
+*.zip
+remediate.zip
