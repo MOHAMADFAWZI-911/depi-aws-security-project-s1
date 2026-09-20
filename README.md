@@ -3,9 +3,7 @@
 ## 1. Project overview
 This project builds a highly secure, private web platform on AWS using Terraform. It features a two-tier architecture where the web servers and database reside in private subnets with no internet access. The infrastructure is protected by a Web Application Firewall (via CloudFront), strict IAM least-privilege roles, and automated remediation using Lambda. Every action and network packet is logged, and data is protected using an immutable AWS Backup vault.
 
-## 2. Architecture diagram
-![Architecture Diagram](docs/architecture.png)
-### Traffic Flow Description
+## 2. Traffic Flow Description
 * **Ingress & Edge Security**: Public requests enter via Amazon CloudFront (HTTPS). CloudFront appends a custom secret header to origin requests before forwarding them to the public Application Load Balancer (`depi-sec-alb`).
 * **Origin Filtering**: The ALB validates the secret header. Valid requests are forwarded to EC2 app servers in private subnets; requests directly targeting the ALB without the header are blocked with a `403 Forbidden`.
 * **Compute & Data Processing**: EC2 instances in Availability Zones `us-east-1a` and `us-east-1b` process Nginx application traffic, read/write shared files on Amazon EFS (`/mnt/shared`), and query Amazon RDS MySQL (`depi-sec-rds-mysql`) over port 3306.
