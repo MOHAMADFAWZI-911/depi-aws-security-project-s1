@@ -104,7 +104,7 @@ resource "aws_network_acl_rule" "ingress_120" {
   egress         = false
   protocol       = "tcp"
   rule_action    = "allow"
-  cidr_block     = "10.0.0.0/16"
+  cidr_block     = "0.0.0.0/0"    # <--- FIX: Allow return traffic from anywhere
   from_port      = 1024
   to_port        = 65535
 }

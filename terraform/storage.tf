@@ -108,6 +108,15 @@ resource "aws_s3_bucket_lifecycle_configuration" "app_lifecycle" {
 # --- Logs Bucket ---
 resource "aws_s3_bucket" "logs_bucket" {
   bucket = "depi-sec-logs-${random_id.suffix.hex}"
+  force_destroy = true
+}
+
+resource "aws_s3_bucket_ownership_controls" "logs_ownership" {
+  bucket = aws_s3_bucket.logs_bucket.id # <-- Change 'logs_bucket' to your actual resource name
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "logs_pab" {

@@ -3,6 +3,10 @@ resource "aws_vpc_endpoint" "s3_gateway" {
   service_name      = "com.amazonaws.${var.region}.s3"
   vpc_endpoint_type = "Gateway"
   route_table_ids   = [aws_route_table.private_rt.id]
+
+  tags = {
+    Name = "depi-sec-s3-endpoint"
+  }
 }
 
 resource "aws_security_group" "endpoint_sg" {

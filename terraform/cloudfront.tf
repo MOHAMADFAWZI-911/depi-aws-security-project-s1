@@ -6,6 +6,10 @@ resource "random_password" "cf_secret" {
 resource "aws_cloudfront_distribution" "app_cdn" {
   enabled = true
   
+  depends_on = [
+    aws_s3_bucket_ownership_controls.logs_ownership
+  ]
+
   origin {
     domain_name = aws_lb.app_alb.dns_name
     origin_id   = "ALBOrigin"
